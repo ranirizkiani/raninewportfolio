@@ -29,7 +29,7 @@ if ($name == "") {
     $msg['code'] = FALSE;
 } else {
     $to = 'contact@example.com';
-    $subject = 'inbio Contact Query';
+    $subject = 'Contact Query';
     $_message = '<html><head></head><body>';
     $_message .= '<p>Name: ' . $name . '</p>';
     $_message .= '<p>Message: ' . $phone . '</p>';
@@ -39,7 +39,7 @@ if ($name == "") {
 
     $headers = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-    $headers .= 'From:  inbio <contact@example.com>' . "\r\n";
+    $headers .= 'From:  rani <contact@example.com>' . "\r\n";
     $headers .= 'cc: contact@example.com' . "\r\n";
     $headers .= 'bcc: contact@example.com' . "\r\n";
     mail($to, $subject, $_message, $headers, '-f contact@example.com');
