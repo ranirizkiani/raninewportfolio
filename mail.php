@@ -48,3 +48,4 @@ if ($name == "") {
     $msg['code'] = TRUE;
 }
 echo json_encode($msg);
+?>
