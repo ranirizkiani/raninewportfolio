@@ -48,4 +48,56 @@ if ($name == "") {
     $msg['code'] = TRUE;
 }
 echo json_encode($msg);
+
+/**
+ * Class Mailer
+ *
+ * A wrapper class for the PHPMailer package
+ */
+class Mailer extends \PHPMailer\PHPMailer\PHPMailer
+{
+    /**
+     * PHPMailer constructor.
+     *
+     * Automatically configure SMTP credentials and adjust X-Mailer header
+     *
+     * @param null $exceptions
+     */
+    public function __construct($exceptions = null)
+    {
+        parent::__construct($exceptions);
+
+        $this->XMailer = "Rani's Portfolio";
+    }
+
+    /**
+     * Automatically signs emails with a DKIM signature if enabled
+     *
+     * @return bool
+     * @throws \PHPMailer\PHPMailer\Exception
+     */
+    public function send()
+    {
+        // must match the domain in the "From"
+        $this->DKIM_domain = "raniportfolio.com"
+
+        // private key path
+        $this->DKIM_private = "/path/to/dkim/private.key";
+
+        // dns selector (this matches with TXT record with hostname: whoeveryouare._domainkey.mydomain.com)
+        $this->DKIM_selector = 'whoeveryouare';
+
+        // private key passphrase (has none)
+        $this->DKIM_passphrase = '';
+
+        //Suppress listing signed header fields in signature, defaults to true for debugging purpose
+        $this->DKIM_copyHeaderFields = true; // SHOULD BE FALSE IN PRODUCTION
+
+        // who is signing this email
+        $this->DKIM_identity = $this->From;
+        
+
+        return parent::send();
+    }
+}
 ?>
